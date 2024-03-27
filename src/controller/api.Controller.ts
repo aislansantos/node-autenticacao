@@ -17,14 +17,13 @@ export const register = async (req: Request, res: Response) => {
         if (!hasUser) {
             let newUser = await User.create({ email, password });
 
-            res.status(201);
-            res.json({ id: newUser.id });
+            return res.status(201).json({ id: newUser.id });
         } else {
-            res.status(500);
-            res.json({ error: "E-mail e/ou senha não enviados." });
+            return res.status(500).json({ error: "Usuário ja existe." });
         }
 
     }
+    return res.status(500).json({ error: "E-mail e/ou senha não enviados." });
 }
 
 
@@ -42,12 +41,11 @@ export const login = async (req: Request, res: Response) => {
         });
 
         if (user) {
-            res.json({ status: true })
-            return;
+            return res.json({ status: true })
         }
     }
 
-    res.json({ status: false })
+    return res.json({ status: false })
 }
 
 
@@ -56,6 +54,6 @@ export const list = async (req: Request, res: Response) => {
     let list: string[] = [];
 
     users.forEach((item => list.push(item.email)))
-
-    res.json({ list })
+    
+    return res.json({ list })
 }

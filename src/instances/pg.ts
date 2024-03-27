@@ -3,7 +3,7 @@ import { Sequelize } from "sequelize";
 
 dotenv.config();
 
-const sequelize = new Sequelize(
+export const sequelize = new Sequelize(
     process.env.PG_DB as string,
     process.env.PG_USER as string,
     process.env.PG_PASSWORD as string,
@@ -12,5 +12,3 @@ const sequelize = new Sequelize(
         port: parseInt(process.env.PG_PORT as string, 10),
     }
 );
-
-export default sequelize;
